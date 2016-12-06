@@ -225,9 +225,16 @@ function Fakeweb() {
         allowLocalConnect = true;
     }
 
+    registerUris = function(options) {
+        if(!Array.isArray(options)) return registerUri(options);
+        options.forEach(registerUri)
+    }
+
     registerUri = function(options) {
         if (options.uri instanceof RegExp) {
           regexMatches.push(options.uri);
+        } else if(Array.isArray(options)) {
+            return registerUris(options);
         } else {
           options.uri = parseUrl(options.uri);
         }
