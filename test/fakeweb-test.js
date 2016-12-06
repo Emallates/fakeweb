@@ -351,12 +351,20 @@ vows.describe('Fakeweb').addBatch({
             assert.equal(spy.useCount, 1);
         }
     },
-    "will register multi Uris using an array": {
+    "will register multi Uris using an array using(registerUri)": {
         topic: function() {
             fakeweb.registerUri([{uri: 'http://www.readme1.com/', body:"readme1"}, {uri: 'http://www.readme2.com/', body:"readme2"}]);
             request.get({uri: 'http://www.readme1.com/'}, this.callback); },
         "successfully" : function(err, resp, body) {
             assert.equal(body, 'readme1');
+        }
+    },
+    "will register multi Uris using an array using(registerUris)": {
+        topic: function() {
+            fakeweb.registerUris([{uri: 'http://www.readme3.com/', body:"readme3"}, {uri: 'http://www.readme4.com/', body:"readme4"}]);
+            request.get({uri: 'http://www.readme4.com/'}, this.callback); },
+        "successfully" : function(err, resp, body) {
+            assert.equal(body, 'readme4');
         }
     }
 }).export(module);
